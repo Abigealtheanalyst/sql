@@ -17,6 +17,9 @@ The `||` values concatenate the columns into strings.
 Edit the appropriate columns -- you're making two edits -- and the NULL rows will be fixed. 
 All the other rows will remain the same.) */
 
+SELECT 
+    product_name || ', ' || COALESCE(product_size, '') || ' (' || COALESCE(product_qty_type, 'unit') || ')'
+FROM product;
 
 
 
@@ -30,11 +33,45 @@ each new market date for each customer, or select only the unique market dates p
 (without purchase details) and number those visits. 
 HINT: One of these approaches uses ROW_NUMBER() and one uses DENSE_RANK(). */
 
+SELECT
+    customer_id,
+    market_date,
+    DENSE_RANK() OVER (PARTITION BY customer_id ORDER BY market_date) AS visit_number
+FROM
+    (
+        SELECT DISTINCT
+            customer_id,
+            market_date
+        FROM
+            customer_purchases
+    ) AS distinct_dates;
 
 /* 2. Reverse the numbering of the query from a part so each customer’s most recent visit is labeled 1, 
 then write another query that uses this one as a subquery (or temp table) and filters the results to 
 only the customer’s most recent visit. */
 
+SELECT
+    customer_id,
+    market_date,
+    visit_number
+FROM
+    (
+        SELECT
+            customer_id,
+            market_date,
+            ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY market_date DESC) AS visit_number
+        FROM
+            customer_purchases
+    ) AS numbered_visits
+WHERE
+    visit_number = 1;
+
 
 /* 3. Using a COUNT() window function, include a value along with each row of the 
 customer_purchases table that indicates how many different times that customer has purchased that product_id. */
+SELECT
+    customer_id,
+    product_id,
+    COUNT(*) OVER (PARTITION BY customer_id, product_id) AS times_purchased
+FROM
+    customer_purchases;
