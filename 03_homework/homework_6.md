@@ -7,6 +7,7 @@
 
 **Write**: Reflect on your previous work and how you would adjust to include ethics and inequity components. Total length should be a few paragraphs, no more than one page.
 
+********************************************************************************************************************
 In reflecting on my previous work, particularly when handling sensitive data, the paramount consideration is always the ethical implications and potential for inequity.
 
 Working with sensitive data inherently involves a responsibility to protect individuals' privacy, maintain confidentiality, and ensure that data usage aligns with ethical standards and legal regulations.
