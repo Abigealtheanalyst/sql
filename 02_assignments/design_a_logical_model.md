@@ -18,6 +18,40 @@ Bonus: Are there privacy implications to this, why or why not?
 Your answer...
 ```
 
+Proposing two architectures for the CUSTOMER_ADDRESS table involves considering how to handle changes to customer addresses over time. Type 1 and Type 2 are classifications used in slowly changing dimensions to describe different approaches to managing historical changes in dimension tables like CUSTOMER_ADDRESS.
+
+Type 1 Architecture (Retain Changes):
+In Type 1 architecture, changes to customer addresses are not retained. Instead, the existing address is overwritten with the new address without preserving any historical information.
+
+Table Structure:
+customer_id (Foreign Key)
+address
+city
+state
+postal_code
+
+Implications:
+Simple to implement and manage.
+Efficient storage utilization since only the latest address is retained.
+However, historical address information is lost, making it unsuitable for auditing or tracking address changes over time.
+
+Type 2 Architecture (Retain Historical Changes):
+In a Type 2 architecture, changes to customer addresses are retained, and historical information is preserved by adding new rows to the CUSTOMER_ADDRESS table whenever an address changes. Each row includes a timestamp to indicate when the address was valid.
+
+Table Structure:
+customer_id (Foreign Key)
+address
+city
+state
+postal_code
+start_date
+end_date
+
+Implications:
+Allows for tracking historical changes in customer addresses.
+Enables auditing and analysis of address changes over time.
+However, it requires more storage space and complex querying to retrieve historical address information.
+
 ## Question 4
 Review the AdventureWorks Schema [here](https://i.stack.imgur.com/LMu4W.gif)
 
