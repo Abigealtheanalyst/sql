@@ -15,9 +15,6 @@ _Hint, search type 1 vs type 2 slowly changing dimensions._
 
 Bonus: Are there privacy implications to this, why or why not?
 ```
-Your answer...
-```
-
 Proposing two architectures for the CUSTOMER_ADDRESS table involves considering how to handle changes to customer addresses over time. Type 1 and Type 2 are classifications used in slowly changing dimensions to describe different approaches to managing historical changes in dimension tables like CUSTOMER_ADDRESS.
 
 Type 1 Architecture (Retain Changes):
@@ -51,6 +48,7 @@ Implications:
 Allows for tracking historical changes in customer addresses.
 Enables auditing and analysis of address changes over time.
 However, it requires more storage space and complex querying to retrieve historical address information.
+```
 
 ## Question 4
 Review the AdventureWorks Schema [here](https://i.stack.imgur.com/LMu4W.gif)
